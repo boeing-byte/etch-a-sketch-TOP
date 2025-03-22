@@ -1,9 +1,19 @@
 const container = document.querySelector(".container");
+const reset = document.querySelector(".reset")
+const grid = document.querySelector(".grid");
+//dimension = prompt("How big do you want the grid? (Max 100 cells)")
 
-createGrid(40);
+reset.addEventListener("click", () => {
+    const grid = document.querySelector(".grid");
+    
+    grid.remove();
+
+    createGrid(getDimension());
+})
 
 
 function createGrid(dimension){
+
     const grid = document.createElement("div") ;
     grid.className = "grid";
     container.appendChild(grid);
@@ -14,26 +24,37 @@ function createGrid(dimension){
         for (let i = 0; i < dimension; i++){
             const cell = document.createElement("div");
             cell.className = "cell";
-            row.appendChild(cell)
-            cell.addEventListener("mouseenter", () => {cell.style.backgroundColor = "black"});
+            cell.style.width =  `${800/dimension}px`;
+            cell.style.height = `${800/dimension}px`;
+            row.appendChild(cell);
+            cell.addEventListener("mouseenter", () => {cell.style.backgroundColor = randomRGBValue()});
         }
     }
 }
 
-function resetBgColor (cell) {
-    cell.style.backgroundColor = "white";
-}   
+function getDimension () {
 
-// function changeCellColor (cell) {
-//     console.log();
-//     cell.style.backgroundColor = "black";
-// }
+    let dimension = prompt("How big? 20-100");
+    dimension = Math.floor(dimension)
+    console.log(`${dimension} = ${typeof dimension}`);
+    if (isNaN(dimension)) {
+        getDimension();
+    } else {
+    return dimension;
+    }
+}
+function randomRGBValue () {
+    // generates a random rbg color string
+    const r = (Math.floor(Math.random() * 255)).toString()
+    const g = (Math.floor(Math.random() * 255)).toString()
+    const b = (Math.floor(Math.random() * 255)).toString()
+    return(`rgb(${r}, ${g}, ${b})`)
+}
+
+createGrid(getDimension());
+
+// let x = "aaaf"
+// console.log(typeof x)
+// console.log(Math.floor(x))
 
 
-// const reset = document.querySelector(".reset")
-
-// reset.addEventListener("click", function(cell){
-//     grid.remove()
-// })
-
-// trying to work out how to reset the grid to all white squares when pressing the reset button
