@@ -39,10 +39,12 @@ function getDimension () {
     console.log(`${dimension} = ${typeof dimension}`);
     if (isNaN(dimension)) {
         getDimension();
-    } else {
+    } else if (dimension < 20 || dimension > 100 {
+        getDimension()
+    }
     return dimension;
     }
-}
+
 function randomRGBValue () {
     // generates a random rbg color string
     const r = (Math.floor(Math.random() * 255)).toString()
